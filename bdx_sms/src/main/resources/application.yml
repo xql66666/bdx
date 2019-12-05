@@ -1,0 +1,18 @@
+server:
+  port: 9021
+spring:
+  application:
+    name: bdx-sms
+  rabbitmq:
+    host: 120.79.247.154
+    username: admin
+    password: bdxrabbitmqszwan
+aliyun:
+  sms:
+    accessKeyId: LTAIuRoGafdqpF3A
+    accessKeySecret: WRvAqPWYzuZuXZWguTeX7qg71jp6AE
+    template_code: SMS_175581405
+    sign_name: 北斗星工作室
+  loginsms:
+    template_code: SMS_175536582
+    sign_name: 北斗星工作室

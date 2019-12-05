@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="bdx_backstage_manager" />
+        <module name="bdx_common" />
+        <module name="bdx_eureka" />
+        <module name="bdx_face" />
+        <module name="bdx_message" />
+        <module name="bdx_sms" />
+        <module name="bdx_user" />
+        <module name="bdx_zuul" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

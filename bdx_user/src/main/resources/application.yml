@@ -1,0 +1,38 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: bdx-user #指定服务名
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://120.79.247.154:3306/bdx?characterEncoding=UTF8
+    username: root
+    password: bdxmysqlszwan
+  jpa:
+    database: MySQL
+    show-sql: true
+  redis:
+    host: 120.79.247.154
+    password: bdxredisszwan
+  rabbitmq:
+    host: 120.79.247.154
+    username: admin
+    password: bdxrabbitmqszwan
+jwt:
+  config:
+    key: szwan
+    ttl: 86400000
+    #ttl: 72000000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:6868/eureka/
+  instance:
+    prefer-ip-address: true
+security:
+  basic:
+    enabled: false
+qiniuyun:
+  accessKey: wimVlUKeF8MUWDzA5xvGacexhFLyOlHX7zUPnDKG
+  secretKey: A7THWiY6aT2MFBABt-j-QLWRqG5z2HsHlak7ajur
+  bucket: bdxheadimg
