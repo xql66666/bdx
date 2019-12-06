@@ -28,20 +28,20 @@
             <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.13</version> <configuration>
-                <imageName>120.79.247.154:5000/${project.artifactId}:${project.version}
-                </imageName>
-                <baseImage>jdk1.8</baseImage>
-                <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
-                <resources>
-                    <resource>
-                        <targetPath>/</targetPath>
-                        <directory>${project.build.directory} </directory>
-                        <include>${project.build.finalName}.jar</include>
-                    </resource>
-                </resources>
-                <dockerHost>http://120.79.247.154:2375</dockerHost>
-            </configuration>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>120.79.247.154:5000/${project.artifactId}:${project.version}</imageName>
+                    <baseImage>jdk1.8</baseImage>
+                    <entryPoint>["java", "-jar", "/${project.build.finalName}.jar"]</entryPoint>
+                    <resources>
+                        <resource>
+                            <targetPath>/</targetPath>
+                            <directory>${project.build.directory} </directory>
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                    <dockerHost>http://120.79.247.154:2375</dockerHost>
+                </configuration>
             </plugin>
         </plugins>
     </build>
