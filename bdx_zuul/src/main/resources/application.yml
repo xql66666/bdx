@@ -21,6 +21,9 @@ zuul:
     bdx-message:
       path: /v3/**
       serviceId: bdx-message
+    bdx-sources:
+      path: /v4/**
+      serviceId: bdx-sources
   sensitive-headers:
   host:
     socket-timeout-millis: 20000

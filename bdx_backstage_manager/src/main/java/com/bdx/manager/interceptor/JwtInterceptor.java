@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
+
+import util.JwtInterceptorUtil;
 import util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -31,31 +33,34 @@ public class JwtInterceptor implements HandlerInterceptor {
     @Autowired
     private RedisTemplate redisTemplate;
 
+    @Autowired
+    private JwtInterceptorUtil jwtInterceptorUtil;
+
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         //System.out.println("经过Manage拦截器~");
         if ("OPTIONS".equals(request.getMethod())) {
-           // System.out.println("是OPTIONS请求");
-            response.reset();
-            // 允许跨域访问的域名：若有端口需写全（协议+域名+端口），若没有端口末尾不用加'/'
-            response.setHeader("Access-Control-Allow-Origin", "*");
-            // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
-            response.setHeader("Access-Control-Allow-Credentials", "true");
-            // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
-            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
-            response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
-            response.setHeader("Vary", "Accept-Encoding,Origin");
-
-            response.setCharacterEncoding("UTF-8");
-            response.setContentType("application/json;charset=UTF-8");
-            PrintWriter pw = response.getWriter();
-            ResponseEntity<Object> responseEntity = new ResponseEntity<>();
-            responseEntity.setCode(ResultCodeBase.CODE_SUCCESS);
-            responseEntity.setMsg(TipConstBase.OPTIONS_SUCCESS);
-            pw.write(JSON.toJSONString(responseEntity));
-            pw.flush();
-            pw.close();
-            return false;
+//           // System.out.println("是OPTIONS请求");
+//            response.reset();
+//            // 允许跨域访问的域名：若有端口需写全（协议+域名+端口），若没有端口末尾不用加'/'
+//            response.setHeader("Access-Control-Allow-Origin", "*");
+//            // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
+//            response.setHeader("Access-Control-Allow-Credentials", "true");
+//            // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
+//            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+//            response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+//            response.setHeader("Vary", "Accept-Encoding,Origin");
+//
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("application/json;charset=UTF-8");
+//            PrintWriter pw = response.getWriter();
+//            ResponseEntity<Object> responseEntity = new ResponseEntity<>();
+//            responseEntity.setCode(ResultCodeBase.CODE_SUCCESS);
+//            responseEntity.setMsg(TipConstBase.OPTIONS_SUCCESS);
+//            pw.write(JSON.toJSONString(responseEntity));
+//            pw.flush();
+//            pw.close();
+            return true;
         }
 
 
@@ -87,21 +92,23 @@ public class JwtInterceptor implements HandlerInterceptor {
                         return true;
                     }
                 }catch (Exception e) {
-                    throw new TokenErrorException("请重新登录");
+                    //throw new TokenErrorException("请重新登录");
+                    return jwtInterceptorUtil.returnTokenEntity(response);
                 }
             }
         }
         //拼装响应信息
-        response.reset();
-        response.setCharacterEncoding("UTF-8");
-        response.setContentType("application/json;charset=UTF-8");
-        PrintWriter pw = response.getWriter();
-        ResponseEntity<Object> responseEntity = new ResponseEntity<>();
-        responseEntity.setCode(ResultCodeBase.CODE_ERROR_USER_IDENTITY_ERROR);
-        responseEntity.setMsg(TipConstBase.OPERATION_IDENTITY_ERROR);
-        pw.write(JSON.toJSONString(responseEntity));
-        pw.flush();
-        pw.close();
-        return false;
+//        response.reset();
+//        response.setCharacterEncoding("UTF-8");
+//        response.setContentType("application/json;charset=UTF-8");
+//        PrintWriter pw = response.getWriter();
+//        ResponseEntity<Object> responseEntity = new ResponseEntity<>();
+//        responseEntity.setCode(ResultCodeBase.CODE_ERROR_USER_IDENTITY_ERROR);
+//        responseEntity.setMsg(TipConstBase.OPERATION_IDENTITY_ERROR);
+//        pw.write(JSON.toJSONString(responseEntity));
+//        pw.flush();
+//        pw.close();
+//        return false;
+         return jwtInterceptorUtil.returnTokenEntity(response);
     }
 }

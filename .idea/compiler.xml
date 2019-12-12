@@ -12,6 +12,7 @@
         <module name="bdx_face" />
         <module name="bdx_message" />
         <module name="bdx_sms" />
+        <module name="bdx_sources" />
         <module name="bdx_user" />
         <module name="bdx_zuul" />
       </profile>

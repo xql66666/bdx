@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import util.AesUtil;
 import util.DateUtil;
+import util.JwtInterceptorUtil;
 import util.JwtUtil;
 
 /**
@@ -20,6 +21,11 @@ import util.JwtUtil;
 @EnableDiscoveryClient
 @EnableFeignClients
 public class ManageApplication {
+
+    @Bean
+    public JwtInterceptorUtil jwtInterceptorUtil() {
+        return new JwtInterceptorUtil();
+    }
 
     @Bean
     public JwtUtil jwtUtil() {
