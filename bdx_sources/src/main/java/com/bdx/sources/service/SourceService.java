@@ -1,9 +1,11 @@
 package com.bdx.sources.service;
 
 import com.bdx.sources.dao.SourceDao;
+import com.bdx.sources.dao.UserDao;
 import com.bdx.sources.entity.param.SearchSourceParam;
 import com.bdx.sources.entity.param.SourceParam;
 import com.bdx.sources.entity.po.Source;
+import com.bdx.sources.entity.vo.SourceDTO;
 import com.bdx.sources.entity.vo.SourceVO;
 import com.github.wenhao.jpa.Sorts;
 import com.github.wenhao.jpa.Specifications;
@@ -32,6 +34,9 @@ public class SourceService {
     private SourceDao sourceDao;
 
     @Autowired
+    private UserDao userDao;
+
+    @Autowired
     private IdWorker idWorker;
 
 
@@ -47,9 +52,9 @@ public class SourceService {
         System.out.println("类型:" + sourceParama.getSourceType());
         Integer[] types = sourceParama.getSourceType();
         System.out.println("长度:" + types.length);
-        String sourceType = "0";
+        String sourceType = "";
         for (Integer type : types) {
-            sourceType = sourceType.concat("," + type.toString());
+            sourceType = sourceType.concat(type.toString() + ",");
         }
         System.out.println("最终：" + sourceType);
         Source source = new Source();
@@ -59,7 +64,7 @@ public class SourceService {
         source.setSourceUrl(sourceParama.getSourceUrl());
         source.setSourcePwd(sourceParama.getSourcePwd());
         source.setSourceIstrue((byte) 0);
-        source.setSourceType(sourceType);
+        source.setSourceType(sourceType.substring(0, sourceType.length() - 1));
         sourceDao.saveAndFlush(source);
     }
 
@@ -75,6 +80,7 @@ public class SourceService {
         Specification<Source> specification = Specifications.<Source>and()
                 .like(StringUtils.isNotBlank(searchSourceParam.getSourceName()), "sourceName", "%" + searchSourceParam.getSourceName() + "%")
                 .eq("sourceIstrue", 1)
+                .in(StringUtils.isNotBlank(searchSourceParam.getSelect()), "sourceType", searchSourceParam.getSelect())
                 .build();
 
         Sort sort = Sorts.builder()
@@ -85,7 +91,7 @@ public class SourceService {
         List<Source> sourceList = sources.getContent();
 
         List<SourceVO> vo = sourceList.stream()
-                .map(e -> new SourceVO(e.getSourceName(), e.getSourceUrl(), e.getSourcePwd(), e.getSourceType().split(",")))
+                .map(e -> new SourceVO(e.getSourceName(), e.getSourceUrl(), e.getSourcePwd(), e.getSourceType().split(","), userDao.findNickNameByUserId(e.getUserId())))
                 .collect(Collectors.toList());
         if (vo.size() == 0) {
             throw new BusinessException("查询不到该资源");
@@ -98,6 +104,24 @@ public class SourceService {
 
 
     }
+
+//    public PageRecordsDto<SourceVO> findSource(int currentPage, int pageSize, SearchSourceParam searchSourceParam) {
+//        if ("".equals(searchSourceParam.getSelect()) || "0".equals(searchSourceParam.getSelect())) {
+//            List<SourceDTO> sourceList = sourceDao.findSourceBySearchSelect("%" + searchSourceParam.getSourceName() + "%", (currentPage-1) * pageSize, pageSize);
+//            List<SourceVO> vo = sourceList.stream()
+//               .map(e -> new SourceVO(e.getSourceName(), e.getSourceUrl(), e.getSourcePwd(), e.getSourceType().split(",")/*, e.getNickname()*/))
+//               .collect(Collectors.toList());
+//            if (vo.size() == 0) {
+//                throw new BusinessException("查询不到该资源");
+//            }
+//            PageRecordsDto<SourceVO> pageRecordsDto = new PageRecordsDto<>();
+//            pageRecordsDto.setTotal(vo.size());
+//            pageRecordsDto.setData(vo);
+//            return pageRecordsDto;
+//        }
+//        //List<SourceDTO> sourceList = sourceDao.findSourceBySearch(searchSourceParam.getSelect(), "%" + searchSourceParam.getSourceName() + "%", new PageRequest(currentPage-1, pageSize));
+//        return null;
+//    }
 
 
 }

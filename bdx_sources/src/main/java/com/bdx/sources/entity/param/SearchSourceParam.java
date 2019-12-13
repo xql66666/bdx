@@ -8,11 +8,21 @@ public class SearchSourceParam {
 
     private String sourceName;
 
+    private String select;
+
     public String getSourceName() {
         return sourceName;
     }
 
     public void setSourceName(String sourceName) {
         this.sourceName = sourceName;
+    }
+
+    public String getSelect() {
+        return select;
+    }
+
+    public void setSelect(String select) {
+        this.select = select;
     }
 }
