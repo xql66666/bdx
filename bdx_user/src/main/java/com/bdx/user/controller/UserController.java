@@ -1,6 +1,7 @@
 package com.bdx.user.controller;
 
 
+import com.bdx.user.client.SourceClient;
 import com.bdx.user.entity.param.*;
 import com.bdx.user.entity.po.User;
 import com.bdx.user.service.UserService;
@@ -31,7 +32,7 @@ import java.util.concurrent.TimeUnit;
  *
  */
 @RestController
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RequestMapping("/user")
 public class UserController {
 
@@ -49,6 +50,9 @@ public class UserController {
 
     @Autowired
     private AttributeUtil attributeUtil;
+
+   // @Autowired
+    //private SourceClient sourceClient;
 
 
     /**
@@ -251,6 +255,16 @@ public class UserController {
         String userId = attributeUtil.getAttributeUserId();
         return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, userService.findUserComplete(userId));
     }
+
+    /**
+     * 查询个人发布的资源
+     * @return
+     */
+//    @PostMapping(value = "/findUcMySource")
+//    public ResponseEntity findUcMySource() {
+//        ResponseEntity response = sourceClient.findMySource();
+//        return response;
+//    }
 
 
 }

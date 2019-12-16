@@ -3,6 +3,7 @@ package com.bdx.sources.controller;
 
 import com.bdx.sources.entity.param.SearchSourceParam;
 import com.bdx.sources.entity.param.SourceParam;
+import com.bdx.sources.entity.vo.MySourceVO;
 import com.bdx.sources.entity.vo.SourceVO;
 import com.bdx.sources.service.SourceService;
 import com.bdx.sources.util.AttributeUtil;
@@ -12,6 +13,8 @@ import entity.PageRecordsDto;
 import entity.ResponseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 
 /**
@@ -41,6 +44,20 @@ public class SourcesController {
         PageRecordsDto<SourceVO> data = sourceService.findSource(currentPage, pageSize, searchSourceParam);
         return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, data);
     }
+
+    @PostMapping(value = "/searchMySource")
+    public ResponseEntity findMySource() {
+        List<MySourceVO> data = sourceService.findMySource(attributeUtil.getAttributeUserId());
+        return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, data);
+    }
+
+    @PostMapping(value = "/deleteMySource/{sourceId}")
+    public ResponseEntity deleteMySource(@PathVariable("sourceId") String sourceId) {
+        sourceService.deleteService(sourceId);
+        return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_DELETE_SUCCESS);
+    }
+
+
 
 
 }

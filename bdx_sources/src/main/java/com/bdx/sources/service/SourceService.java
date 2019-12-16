@@ -5,6 +5,7 @@ import com.bdx.sources.dao.UserDao;
 import com.bdx.sources.entity.param.SearchSourceParam;
 import com.bdx.sources.entity.param.SourceParam;
 import com.bdx.sources.entity.po.Source;
+import com.bdx.sources.entity.vo.MySourceVO;
 import com.bdx.sources.entity.vo.SourceDTO;
 import com.bdx.sources.entity.vo.SourceVO;
 import com.github.wenhao.jpa.Sorts;
@@ -103,6 +104,32 @@ public class SourceService {
         return pageRecordsDto;
 
 
+    }
+
+    /**
+     * 查询个人资源
+     * @param userId
+     * @return
+     */
+    public List<MySourceVO> findMySource(String userId) {
+        List<SourceDTO> mySourceList = sourceDao.findMySourceList(userId);
+        List<MySourceVO> vo = mySourceList.stream()
+                .map(e -> new MySourceVO(e.getSourceId(), e.getSourceName(), e.getSourceUrl(), e.getSourcePwd(), e.getSourceType().split(",")))
+                .collect(Collectors.toList());
+        if (vo.size() == 0) {
+            return null;
+        }
+        return vo;
+    }
+
+    /**
+     * 根据id删除资源
+     * @param sourceId
+     */
+
+    public void deleteService(String sourceId) {
+        Integer source = sourceDao.deleteMySourceBySourceId(sourceId);
+        System.out.println("Id是啥=========" + source);
     }
 
 //    public PageRecordsDto<SourceVO> findSource(int currentPage, int pageSize, SearchSourceParam searchSourceParam) {

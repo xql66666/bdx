@@ -31,8 +31,6 @@ import java.util.concurrent.TimeUnit;
  * @author: 磊大大
  * @date: 2019/10/15 14:49
  *
- * 修改用户的user表 userInfo表也跟着更新
- * 判断用户信息是否完善 完善修改complete字段为1
  */
 @RestController
 @CrossOrigin

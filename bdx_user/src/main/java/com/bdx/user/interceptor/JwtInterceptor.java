@@ -1,7 +1,11 @@
 package com.bdx.user.interceptor;
 
+import com.alibaba.fastjson.JSON;
 import constants.IdentityEnum;
 import constants.RedisKey;
+import constants.ResultCodeBase;
+import constants.TipConstBase;
+import entity.ResponseEntity;
 import exception.core.TokenErrorException;
 import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import util.JwtUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
 
 /**
  * @author: 磊大大
@@ -34,7 +39,26 @@ public class JwtInterceptor implements HandlerInterceptor {
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
         if ("OPTIONS".equals(request.getMethod())) {
-           // System.out.println("是options请求");
+//            // System.out.println("是OPTIONS请求");
+//            response.reset();
+//            // 允许跨域访问的域名：若有端口需写全（协议+域名+端口），若没有端口末尾不用加'/'
+//            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+//            // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
+//            response.setHeader("Access-Control-Allow-Credentials", "true");
+//            // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
+//            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Timestamp");
+//            response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
+//            response.setHeader("Vary", "Accept-Encoding,Origin");
+//
+//            response.setCharacterEncoding("UTF-8");
+//            response.setContentType("application/json;charset=UTF-8");
+//            PrintWriter pw = response.getWriter();
+//            ResponseEntity<Object> responseEntity = new ResponseEntity<>();
+//            responseEntity.setCode(ResultCodeBase.CODE_SUCCESS);
+//            responseEntity.setMsg(TipConstBase.OPTIONS_SUCCESS);
+//            pw.write(JSON.toJSONString(responseEntity));
+//            pw.flush();
+//            pw.close();
             return true;
         }
 
