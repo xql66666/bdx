@@ -60,9 +60,9 @@ public class WebFilter extends ZuulFilter {
             // 允许跨域访问的域名：若有端口需写全（协议+域名+端口），若没有端口末尾不用加'/'
             requestContext.getResponse().setHeader("Access-Control-Allow-Origin", "*");
             // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
-            requestContext.getResponse().setHeader("Access-Control-Allow-Credentials", "true");
+           // requestContext.getResponse().setHeader("Access-Control-Allow-Credentials", "true");
             // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
-            requestContext.getResponse().setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+            requestContext.getResponse().setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Timestamp");
             requestContext.getResponse().setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
             requestContext.getResponse().setHeader("Vary", "Accept-Encoding,Origin");
             requestContext.getResponse().setContentType("application/json;charset=UTF-8");

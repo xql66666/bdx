@@ -161,7 +161,7 @@ public class UserService {
     public void addUserInfo(UserInfo userInfo) {
         //userInfo.setUserId(userInfo.getUserId());              //用户id
         //userInfo.setNickname("小北默认昵称");                   //用户昵称
-        userInfo.setHeadImgUrl("http://q1cw8aki8.bkt.clouddn.com/bdxheadimgb156089d-58fb-4da2-a107-367ec636ef91");                            //用户头像url
+        userInfo.setHeadImgUrl("http://img.xuqianlei.top/bdxheadimgb156089d-58fb-4da2-a107-367ec636ef91");                            //用户头像url
         userInfo.setSex((byte) 0);                             //用户性别 默认女
         userInfo.setUserMail("");                              //用户邮箱
         userInfo.setBirthday(null);                            //出生日期

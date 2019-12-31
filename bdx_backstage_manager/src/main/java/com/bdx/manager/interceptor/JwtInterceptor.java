@@ -47,7 +47,7 @@ public class JwtInterceptor implements HandlerInterceptor {
             // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
             response.setHeader("Access-Control-Allow-Credentials", "true");
             // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
-            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Timestamp");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
             response.setHeader("Vary", "Accept-Encoding,Origin");
 
@@ -74,7 +74,9 @@ public class JwtInterceptor implements HandlerInterceptor {
                 try {
                     Claims claims = jwtUtil.parseJWT(token);
                     String id = (String) claims.get("jti");
+
                     String tokenRedis = (String) redisTemplate.opsForValue().get(RedisKey.REDIS_TOKEN + id);
+                    System.out.println("id是啊啊啊啊啊啊啊啊" + id + "============" + tokenRedis);
                     if (!token.equals(tokenRedis) || "".equals(tokenRedis)) {
                         throw new TokenErrorException("请重新登录"); //让前端跳转登录界面
                     }
@@ -109,6 +111,7 @@ public class JwtInterceptor implements HandlerInterceptor {
 //        pw.flush();
 //        pw.close();
 //        return false;
+        System.out.println("aaaaaaaaaaaaaaaaaaaaa");
          return jwtInterceptorUtil.returnTokenEntity(response);
     }
 }

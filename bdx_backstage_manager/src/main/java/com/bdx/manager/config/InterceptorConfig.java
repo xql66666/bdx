@@ -1,7 +1,5 @@
 package com.bdx.manager.config;
 
-
-
 import com.bdx.manager.interceptor.JwtInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

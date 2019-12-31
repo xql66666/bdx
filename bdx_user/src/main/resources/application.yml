@@ -33,6 +33,6 @@ security:
   basic:
     enabled: false
 qiniuyun:
-  accessKey: wimVlUKeF8MUWDzA5xvGacexhFLyOlHX7zUPnDKG
-  secretKey: A7THWiY6aT2MFBABt-j-QLWRqG5z2HsHlak7ajur
+  accessKey: ExPCkduypDz-jNhbPl1uwE3dMXMXGttSr5EYCzHl
+  secretKey: bEec7XyV5OCdFnsDZmIPT3n8K-UKRg_K_2pUq3OO
   bucket: bdxheadimg
