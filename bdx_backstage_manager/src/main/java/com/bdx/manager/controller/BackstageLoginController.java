@@ -95,6 +95,7 @@ public class BackstageLoginController {
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
     public ResponseEntity login(@RequestBody LoginUserParam user) {
+        System.out.println("到这里");
 
         User userLogin = backstageLoginUserService.login(aesUtil.aesDecrypt(user.getUsername()), aesUtil.aesDecrypt(user.getPassword()));
         if (userLogin == null) {

@@ -17,6 +17,7 @@
         <module>bdx_face</module>
         <module>bdx_message</module>
         <module>bdx_sources</module>
+        <module>bdx_info</module>
     </modules>
 
     <packaging>pom</packaging>

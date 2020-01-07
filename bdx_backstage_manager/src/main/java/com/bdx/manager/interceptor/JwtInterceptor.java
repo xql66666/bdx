@@ -38,14 +38,14 @@ public class JwtInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        //System.out.println("经过Manage拦截器~");
+
         if ("OPTIONS".equals(request.getMethod())) {
-           // System.out.println("是OPTIONS请求");
+            System.out.println("是OPTIONS请求");
             response.reset();
             // 允许跨域访问的域名：若有端口需写全（协议+域名+端口），若没有端口末尾不用加'/'
             response.setHeader("Access-Control-Allow-Origin", "*");
             // 允许前端带认证cookie：启用此项后，上面的域名不能为'*'，必须指定具体的域名，否则浏览器会提示
-            response.setHeader("Access-Control-Allow-Credentials", "true");
+            //response.setHeader("Access-Control-Allow-Credentials", "true");
             // 提示OPTIONS预检时，后端需要设置的两个常用自定义头
             response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, Timestamp");
             response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS");
@@ -63,8 +63,9 @@ public class JwtInterceptor implements HandlerInterceptor {
             return true;
         }
 
-
+        System.out.println("经过Manage拦截器~");
         String header = request.getHeader("Authorization");
+        System.out.println("aaaaaa=" + header);
         if (header != null && !"".equals(header)) {
             //如果有包含Authorization头信息 就对其进行解析
             if (header.startsWith("Bearer ")) {

@@ -49,6 +49,7 @@ public class WebFilter extends ZuulFilter {
         RequestContext requestContext = RequestContext.getCurrentContext();
         HttpServletRequest request = requestContext.getRequest();
         if (request.getMethod().equals("OPTIONS")){
+            System.out.println("请求时=" + request.getMethod());
             return false;
         }
         String timestamp = request.getHeader("Timestamp");
@@ -72,6 +73,7 @@ public class WebFilter extends ZuulFilter {
             return false;
 
         }
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
         return true;
     }
 }

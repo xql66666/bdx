@@ -10,6 +10,7 @@
         <module name="bdx_common" />
         <module name="bdx_eureka" />
         <module name="bdx_face" />
+        <module name="bdx_info" />
         <module name="bdx_message" />
         <module name="bdx_sms" />
         <module name="bdx_sources" />
