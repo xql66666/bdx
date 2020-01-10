@@ -108,7 +108,7 @@ public class BackstageLoginController {
             return new ResponseEntity<>(ResultCodeBase.CODE_ERROR_USER_IDENTITY_ERROR, TipConstBase.OPERATION_IDENTITY_ERROR);
         }
         String token = jwtUtil.createJWT(userLogin.getUserId(), userLogin.getUserPhone(), role);
-        redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userLogin.getUserId(), token, 6, TimeUnit.HOURS);
+        redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userLogin.getUserId(), token, 24, TimeUnit.HOURS);
         HashMap<String, Object> map = new HashMap<>();
         map.put("token", token);
         return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_LOGIN_SUCCESS, map);

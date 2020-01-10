@@ -48,8 +48,19 @@ public class InfoController {
     }
 
     /**
+     * 展示资讯
+     * @param currentPage
+     * @return
+     */
+    @PostMapping(value = "/findAllInfo/{currentPage}")
+    public ResponseEntity findAllInfo(@PathVariable("currentPage") String currentPage) {
+        System.out.println("当前页是：" + currentPage);
+        return infoClient.findAllInfo(currentPage);
+    }
+
+    /**
      * 发布资讯是内容添加的图片
-     * @param multipartFile
+     * @param multipartHttpServletRequest
      * @return
      */
     @PostMapping(value = "/uploadInfoImg")
