@@ -9,6 +9,7 @@ import java.util.Date;
 public class InfoVO {
     private int id;
     private String nickname;
+    private String headImgUrl;
     private String infoName;
     private String infoContent;
     private String infoUser;
@@ -31,6 +32,14 @@ public class InfoVO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public String getHeadImgUrl() {
+        return headImgUrl;
+    }
+
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
     }
 
     public String getInfoName() {
@@ -89,21 +98,10 @@ public class InfoVO {
         this.createTime = createTime;
     }
 
-    public InfoVO(int id, String nickname, String infoName, String infoContent, String infoUser, Integer infoReplyNum, Integer infoGood, Byte infoType, Date createTime) {
+    public InfoVO(int id, String nickname, String headImgUrl, String infoName, String infoContent, Integer infoReplyNum, Integer infoGood, Byte infoType, Date createTime) {
         this.id = id;
         this.nickname = nickname;
-        this.infoName = infoName;
-        this.infoContent = infoContent;
-        this.infoUser = infoUser;
-        this.infoReplyNum = infoReplyNum;
-        this.infoGood = infoGood;
-        this.infoType = infoType;
-        this.createTime = createTime;
-    }
-
-    public InfoVO(int id, String nickname, String infoName, String infoContent, Integer infoReplyNum, Integer infoGood, Byte infoType, Date createTime) {
-        this.id = id;
-        this.nickname = nickname;
+        this.headImgUrl = headImgUrl;
         this.infoName = infoName;
         this.infoContent = infoContent;
         this.infoReplyNum = infoReplyNum;

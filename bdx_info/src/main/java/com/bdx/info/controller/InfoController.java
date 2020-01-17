@@ -54,4 +54,14 @@ public class InfoController {
         List<InfoVO> infoVOLists =  infoService.findInfoList(Integer.parseInt(currentPage));
         return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, infoVOLists);
     }
+
+    /**
+     * 根据id查询资讯详情页
+     * @param infoId
+     * @return
+     */
+    @PostMapping(value = "/findInfoById/{infoId}")
+    public ResponseEntity findInfoDetailById(@PathVariable("infoId") String infoId) {
+        return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, infoService.findInfoDetail(infoId));
+    }
 }

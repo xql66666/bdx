@@ -6,6 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
@@ -15,8 +16,13 @@ import java.util.List;
  */
 public interface InfoDao extends JpaRepository<Info, Integer>, JpaSpecificationExecutor<Info> {
 
-    @Query(value = "SELECT new com.bdx.info.entity.vo.InfoVO(i.id, u.nickname, i.infoName, i.infoContent, i.infoReplyNum, i.infoGood, i.infoType, i.createTime) " +
-            "FROM Info i left join User u ON u.userId = i.infoUser where i.infoType > 0 " +
+    @Query(value = "SELECT new com.bdx.info.entity.vo.InfoVO(i.id, u.nickname, u.headImgUrl ,i.infoName, i.infoContent, i.infoReplyNum, i.infoGood, i.infoType, i.createTime) " +
+            "FROM Info i left join UserInfo u ON u.userId = i.infoUser where i.infoType > 0 " +
             "order by i.createTime desc", nativeQuery = false)
     List<InfoVO> findInfoList(Pageable pageable);
+
+    @Query(value = "SELECT new com.bdx.info.entity.vo.InfoVO(i.id, u.nickname, u.headImgUrl ,i.infoName, i.infoContent, i.infoReplyNum, i.infoGood, i.infoType, i.createTime) " +
+            "FROM Info i left join UserInfo u ON u.userId = i.infoUser where i.id = :infoId and i.infoType > 0" +
+            "order by i.createTime desc", nativeQuery = false)
+    InfoVO findInfoDetail(@Param("infoId") Integer infoId);
 }
