@@ -1,7 +1,6 @@
 package com.bdx.info.entity.po;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 

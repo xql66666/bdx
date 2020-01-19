@@ -1,6 +1,7 @@
 package com.bdx.info.controller;
 
 import com.bdx.info.entity.param.InfoAddParam;
+import com.bdx.info.entity.param.InfoCommentAddParam;
 import com.bdx.info.entity.vo.InfoVO;
 import com.bdx.info.service.InfoService;
 import com.bdx.info.util.AttributeUtil;
@@ -63,5 +64,26 @@ public class InfoController {
     @PostMapping(value = "/findInfoById/{infoId}")
     public ResponseEntity findInfoDetailById(@PathVariable("infoId") String infoId) {
         return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, infoService.findInfoDetail(infoId));
+    }
+
+    /**
+     * 给评论添加回复
+     * @param infoCommentAddParam
+     * @return
+     */
+    @PostMapping(value = "/addInfoComment")
+    public ResponseEntity addInfoComment(@RequestBody InfoCommentAddParam infoCommentAddParam) {
+        infoService.addInfoComment(infoCommentAddParam, attributeUtil.getAttributeUserId());
+        return new ResponseEntity(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_SAVE_SUCCESS);
+    }
+
+    /**
+     * 查询资讯的回复
+     * @param infoId
+     * @return
+     */
+    @PostMapping(value = "/findInfoComment/{infoId}")
+    public ResponseEntity findInfoCommentList(@PathVariable("infoId") String infoId) {
+        return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, infoService.findInfoReplyListById(infoId));
     }
 }
