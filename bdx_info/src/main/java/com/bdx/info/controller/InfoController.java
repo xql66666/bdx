@@ -57,6 +57,18 @@ public class InfoController {
     }
 
     /**
+     * 根据类型查询不同列表
+     * @param currentPage
+     * @param infoType
+     * @return
+     */
+    @PostMapping(value = "/findAllInfoByType/{currentPage}/{infoType}")
+    public ResponseEntity findAllInfoByType(@PathVariable("currentPage") String currentPage, @PathVariable("infoType") int infoType) {
+        List<InfoVO> infoVOLists = infoService.findInfoListByType(Integer.parseInt(currentPage), infoType);
+        return new ResponseEntity<>(ResultCodeBase.CODE_SUCCESS, TipConstBase.OPERATION_GET_SUCCESS, infoVOLists);
+    }
+
+    /**
      * 根据id查询资讯详情页
      * @param infoId
      * @return

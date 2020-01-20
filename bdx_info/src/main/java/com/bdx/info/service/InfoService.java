@@ -85,4 +85,13 @@ public class InfoService {
         List<InfoReplyVO> infoReplyByInfoId = infoReplyDao.findInfoReplyByInfoId(Integer.valueOf(infoId));
         return infoReplyByInfoId;
     }
+
+    public List<InfoVO> findInfoListByType(int currentPage, int infoType) {
+        List<InfoVO> infoListByType = infoDao.findInfoListByType((byte) infoType, new PageRequest(currentPage-1, 10));
+        infoListByType.stream().forEach(x -> {
+            //把content中的标签过滤一下
+            x.setInfoContent(DelTagsUtil.getTextFromHtml(x.getInfoContent()));
+        });
+        return infoListByType;
+    }
 }

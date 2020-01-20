@@ -59,24 +59,28 @@ public class JwtInterceptor implements HandlerInterceptor {
                     if (roles != null && roles.equals(IdentityEnum.ORDINARY.getDesc())) {
                         request.setAttribute("claims", IdentityEnum.ORDINARY.getDesc());
                         request.setAttribute("userId",id);
+                        return true;
                     }
                     if (roles != null && roles.equals(IdentityEnum.MEMBER.getDesc())) {
                         request.setAttribute("claims", IdentityEnum.MEMBER.getDesc());
                         request.setAttribute("userId",id);
+                        return true;
                     }
                     if (roles != null && roles.equals(IdentityEnum.MANAGE.getDesc())) {
                         request.setAttribute("claims", IdentityEnum.MANAGE.getDesc());
                         request.setAttribute("userId",id);
+                        return true;
                     }
                     if (roles != null && roles.equals(IdentityEnum.ROOT.getDesc())) {
                         request.setAttribute("claims", IdentityEnum.ROOT.getDesc());
                         request.setAttribute("userId",id);
+                        return true;
                     }
                 }catch (Exception e) {
                     return jwtInterceptorUtil.returnTokenEntity(response);
                 }
             }
         }
-        return true;
+        return jwtInterceptorUtil.returnUnLoginTokenEntity(response);
     }
 }

@@ -24,6 +24,11 @@ public interface InfoDao extends JpaRepository<Info, Integer>, JpaSpecificationE
     List<InfoVO> findInfoList(Pageable pageable);
 
     @Query(value = "SELECT new com.bdx.info.entity.vo.InfoVO(i.id, u.nickname, u.headImgUrl ,i.infoName, i.infoContent, i.infoReplyNum, i.infoGood, i.infoType, i.createTime) " +
+            "FROM Info i left join UserInfo u ON u.userId = i.infoUser where i.infoType = :infoType " +
+            "order by i.createTime desc", nativeQuery = false)
+    List<InfoVO> findInfoListByType(@Param("infoType")Byte infoType, Pageable pageable);
+
+    @Query(value = "SELECT new com.bdx.info.entity.vo.InfoVO(i.id, u.nickname, u.headImgUrl ,i.infoName, i.infoContent, i.infoReplyNum, i.infoGood, i.infoType, i.createTime) " +
             "FROM Info i left join UserInfo u ON u.userId = i.infoUser where i.id = :infoId and i.infoType > 0" +
             "order by i.createTime desc", nativeQuery = false)
     InfoVO findInfoDetail(@Param("infoId") Integer infoId);
