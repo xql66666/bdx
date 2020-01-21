@@ -114,7 +114,7 @@ public class UserController {
             //JWT
             String role = userService.findRoleByUserId(userLogin.getUserId());
             String token = jwtUtil.createJWT(userLogin.getUserId(), userLogin.getUserPhone(), role);
-            redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userLogin.getUserId(), token, 24, TimeUnit.HOURS);
+            redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userLogin.getUserId(), token, 16, TimeUnit.HOURS);
             LoginUserInfoVO baseInfoById = userService.findUserBaseInfoById(userLogin.getUserId());
             HashMap<String, Object> map = new HashMap<>();
             map.put("token", token);
@@ -147,7 +147,7 @@ public class UserController {
             //JWT
             String role = userService.findRoleByUserId(userCodeLogin.getUserId());
             String token = jwtUtil.createJWT(userCodeLogin.getUserId(), userCodeLogin.getUserPhone(), role);
-            redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userCodeLogin.getUserId(), token, 24, TimeUnit.HOURS);
+            redisTemplate.opsForValue().set(RedisKey.REDIS_TOKEN + userCodeLogin.getUserId(), token, 16, TimeUnit.HOURS);
             LoginUserInfoVO baseInfoById = userService.findUserBaseInfoById(userCodeLogin.getUserId());
             HashMap<String, Object> map = new HashMap<>();
             map.put("token", token);

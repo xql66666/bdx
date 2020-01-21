@@ -1,4 +1,4 @@
 jwt:
   config:
     key: szwan
-    ttl: 7200000
+    ttl: 57600000

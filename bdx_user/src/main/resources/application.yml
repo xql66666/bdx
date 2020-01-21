@@ -21,7 +21,7 @@ spring:
 jwt:
   config:
     key: szwan
-    ttl: 86400000
+    ttl: 57600000
     #ttl: 72000000
 eureka:
   client:
