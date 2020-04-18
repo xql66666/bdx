@@ -6,3 +6,4 @@ eureka:
     fetch-registry: false
     service-url:
       defaultZone: http://127.0.0.1:${server.port}/eureka/
+      #defaultZone: http://120.79.247.154:${server.port}/eureka/

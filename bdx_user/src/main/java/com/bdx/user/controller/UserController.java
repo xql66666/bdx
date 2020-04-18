@@ -217,6 +217,8 @@ public class UserController {
             if (headImg == null || "".equals(headImg)){
                 throw new BusinessException("上传头像失败");
             }
+            System.out.println("//////////////////////////");
+            System.out.println("//////////////////////////====" + headImg);
             userService.updateUcHeadImg(headImg, userId);
         } catch (IOException e) {
             e.printStackTrace();

@@ -81,6 +81,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        return jwtInterceptorUtil.returnUnLoginTokenEntity(response);
+        //return jwtInterceptorUtil.returnUnLoginTokenEntity(response);
+        return false;
     }
 }

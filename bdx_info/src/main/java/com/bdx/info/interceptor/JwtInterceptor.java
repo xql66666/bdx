@@ -41,7 +41,7 @@ public class JwtInterceptor implements HandlerInterceptor {
         //无论如何都放行 具体能不能操作还是在具体的从操作中去判断.
         //拦截器只是负责把头请求头中包含的token令牌进行严格解析验证
         String header = request.getHeader("Authorization");
-        System.out.println("token头" + header);
+       // System.out.println("token头" + header);
         if (header != null && !"".equals(header)) {
             //如果有包含Authorization头信息 就对其进行解析
             if (header.startsWith("Bearer ")) {
@@ -81,6 +81,7 @@ public class JwtInterceptor implements HandlerInterceptor {
                 }
             }
         }
-        return jwtInterceptorUtil.returnUnLoginTokenEntity(response);
+       // boolean b = jwtInterceptorUtil.returnUnLoginTokenEntity(response);
+        return false;
     }
 }
