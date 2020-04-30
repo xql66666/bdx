@@ -7,6 +7,7 @@ import com.bdx.user.entity.po.User;
 import com.bdx.user.service.UserService;
 import com.bdx.user.util.AttributeUtil;
 import com.bdx.user.util.QiNiuUtil;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import constants.RedisKey;
 import constants.ResultCodeBase;
 import constants.TipConstBase;
@@ -24,6 +25,7 @@ import util.JwtUtil;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -51,8 +53,8 @@ public class UserController {
     @Autowired
     private AttributeUtil attributeUtil;
 
-   // @Autowired
-    //private SourceClient sourceClient;
+    @Autowired
+    private SourceClient sourceClient;
 
 
     /**
@@ -262,11 +264,18 @@ public class UserController {
      * 查询个人发布的资源
      * @return
      */
-//    @PostMapping(value = "/findUcMySource")
-//    public ResponseEntity findUcMySource() {
-//        ResponseEntity response = sourceClient.findMySource();
-//        return response;
-//    }
+    @PostMapping(value = "/findUcMySource")
+    @HystrixCommand(fallbackMethod = "findSourceFail")
+    public ResponseEntity findUcMySource() {
+        ResponseEntity response = sourceClient.findMySource();
+        return response;
+    }
+
+    private ResponseEntity findSourceFail(){
+        // 监控报警机制
+        System.out.println("资源模块调用失败~");
+        return new ResponseEntity<>(ResultCodeBase.CODE_EXCEPTION, TipConstBase.OPERATION_SYS_SO_BUSY, null);
+    }
 
 
 }

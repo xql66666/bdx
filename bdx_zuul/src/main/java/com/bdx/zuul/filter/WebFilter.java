@@ -50,7 +50,7 @@ public class WebFilter extends ZuulFilter {
         HttpServletRequest request = requestContext.getRequest();
         if (request.getMethod().equals("OPTIONS")){
             System.out.println("请求时=" + request.getMethod());
-            return false;
+            return true;
         }
         String timestamp = request.getHeader("Timestamp");
         //TODO 暂时只添加url时效性校验 防篡改签名以后再弄
