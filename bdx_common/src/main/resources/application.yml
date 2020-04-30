@@ -1,4 +1,0 @@
-jwt:
-  config:
-    key: szwan
-    ttl: 57600000
