@@ -83,7 +83,7 @@ public class UserController {
     }
 
     /**
-     * 注册
+     * 注册~
      * @param
      * @param user
      * @return
