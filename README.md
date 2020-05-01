@@ -1,5 +1,5 @@
 # bdx
-### 一个基础SpringCloud的北斗星工作室官网
+### 一个基于SpringCloud的北斗星工作室官网
 ##### 包含以下模块：
 +    bdx_eureka          (注册中心)
 +    bdx_user            (用户模块)
