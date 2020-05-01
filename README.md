@@ -9,4 +9,5 @@
 +    bdx_sms             (短信发送队列)
 +    bdx_backstage       (后台模块)
 +    bdx_zuul            (网关)
++    bdx_common          (通用包)
 ##### 由于配置中包含私人信息，上传时已忽略配置文件
